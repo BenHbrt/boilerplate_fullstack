@@ -2,6 +2,7 @@ const sqlite = require('sqlite3').verbose();
 const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors')
+const { backendPort, frontendBase } = require('../src/env.js')
 
 const app = express();
 
@@ -11,7 +12,7 @@ const db = new sqlite.Database('./backend/database.db', sqlite.OPEN_READWRITE, (
 })
 
 app.use(bodyParser.json())
-app.use(cors({origin: 'http://localhost:3000'}))
+app.use(cors({origin: `${frontendBase}`}))
 
 // <<GET>> ALL DEMO NAMES
 app.get("/api/demoNames", (req, res) => {
@@ -42,4 +43,4 @@ app.get("/api/demoNames", (req, res) => {
     }
 })
 
-app.listen(3001)
+app.listen(`${backendPort}`)

@@ -1,13 +1,14 @@
 import './App.scss';
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import { backendBase } from './env';
 
 function App() {
 
   const [data, setData] = useState([])
 
   const loadData = async () => {
-    const APIData = await axios.get('http://localhost:3001/api/demoNames')
+    const APIData = await axios.get(`${backendBase}/api/demoNames`)
     setData(APIData.data.data)
   }
 
